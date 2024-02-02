@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Sequence Detection - Konami Code</title>
+    <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+
+<body>
+    <script>
+        const pressed = [];
+        const secretCode = 'carol';
+        window.addEventListener('keyup', (e) => {
+            pressed.push(e.key);
+            /*-secretCode.length calcula o índice negativo a partir do final do array. Como o método splice aceita índices negativos para contar a partir do final do array, -secretCode.length indica a posição de secretCode.length elementos a partir do final.*/
+            /*Se o usuário pressionou mais teclas do que o comprimento de secretCode, pressed.length - secretCode.length será positivo, indicando que existem elementos excedentes no início do array que precisam ser removidos.*/
+            pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+            if (pressed.join('').includes(secretCode)) {
+                console.log('cornified');
+                cornify_add();
+            }
+        })
+    </script>
+</body>
+
+</html>
